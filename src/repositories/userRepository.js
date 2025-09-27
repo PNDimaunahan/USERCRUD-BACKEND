@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
     DateOfBirth: { type: Date, required: true },
     Email: { type: String, required: true, unique: true },
     PhoneNumber: { type: String, required: true },
-    Status: { type: String, enum: ['Active','Inactive','Suspended'], default: 'Active' },
+    Status: { type: String, enum: ['Active','Inactive','Suspended','Archived'], default: 'Active' },
     Archived: { type: Boolean, default: false },
     archivedAt: { type: Date, default: null }
 }, { timestamps: true });

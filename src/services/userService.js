@@ -39,7 +39,7 @@ exports.hardDeleteUser = async (id) => {
 exports.archiveUser = async (id) => {
     return await User.findByIdAndUpdate(
         id,
-        { Archived: true, archivedAt: new Date() },
+        { Status: 'Archived', Archived: true, archivedAt: new Date() },
         { new: true }
     );
 };
