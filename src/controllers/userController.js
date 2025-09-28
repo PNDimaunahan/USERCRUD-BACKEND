@@ -3,7 +3,18 @@ const userService = require('../services/userService')
 
 exports.createUser = async (req, res) => {
   try {
+
+    for (const [key, value] of Object.entries(req.body)) {
+      if (typeof value === 'string' && value.trim().length === 0) {
+        return res.status(400).json({
+          success: false,
+          message: `${key} cannot be empty or only spaces`
+        })
+      }
+    }
+
     const user = await userService.createUser(req.body)
+
     res.status(201).json({
       success: true,
       message: "User created successfully",
