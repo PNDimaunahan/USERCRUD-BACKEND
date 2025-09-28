@@ -50,13 +50,13 @@ exports.updateUser = async (req, res) => {
     const user = await userService.updateUser(req.params.id, req.body)
     if (!user) return res.status(404).json({ message: 'User not found' })
     res.status(200).json({
-      status: true,
+      success: true,
       message: "User updated successfully",
       data: user
     })
   } catch (err) {
     res.status(400).json({ 
-      status: false,
+      success: false,
       message: err.message 
     })
   }
@@ -67,13 +67,13 @@ exports.archiveUser = async (req, res) => {
     const user = await userService.archiveUser(req.params.id);
     if (!user) return res.status(404).json({ message: 'User not found' });
     res.status(200).json({ 
-      status: true,
+      success: true,
       message: 'User archived successfully', 
       data: user 
     });
   } catch (err) {
     res.status(400).json({ 
-      status: false,
+      success: false,
       message: err.message 
     });
   }
@@ -84,13 +84,13 @@ exports.unarchiveUser = async (req, res) => {
     const user = await userService.unarchiveUser(req.params.id);
     if (!user) return res.status(404).json({ message: 'User not found' });
     res.json({ 
-      status: true,
+      success: true,
       message: 'User unarchived successfully', 
       data: user 
     });
   } catch (err) {
     res.status(400).json({ 
-      status: false,
+      success: false,
       message: err.message 
     });
   }
@@ -101,12 +101,12 @@ exports.hardDeleteUser = async (req, res) => {
     const user = await userService.hardDeleteUser(req.params.id);
     if (!user) return res.status(404).json({ message: 'User not found' });
     res.status(200).json({ 
-      status: true,
+      success: true,
       message: 'User permanently deleted successfully'
     });
   } catch (err) {
     res.status(400).json({ 
-      status: false,
+      success: false,
       message: err.message 
     });
   }
