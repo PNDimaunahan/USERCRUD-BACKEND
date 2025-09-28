@@ -1,11 +1,19 @@
+const { success } = require('zod')
 const userService = require('../services/userService')
 
 exports.createUser = async (req, res) => {
   try {
     const user = await userService.createUser(req.body)
-    res.status(201).json(user)
+    res.status(201).json({
+      success: true,
+      message: "User created successfully",
+      data: user,
+    })
   } catch (err) {
-    res.status(400).json({ error: err.message })
+    res.status(400).json({ 
+      success: false,
+      message: err.message 
+    })
   }
 }
 
@@ -18,7 +26,7 @@ exports.getUsers = async (req, res) => {
       sortBy,
       sortOrder
     )
-    res.json(users)
+    res.status(200).json(users)
   } catch (err) {
     res.status(500).json({ error: err.message })
   }
@@ -27,10 +35,13 @@ exports.getUsers = async (req, res) => {
 exports.getUser = async (req, res) => {
   try {
     const user = await userService.getUserById(req.params.id)
-    if (!user) return res.status(404).json({ message: 'User not found' })
-    res.json(user)
+    if (!user) return res.status(404).json({ success: false, message: 'User not found' })
+    res.status(200).json(user)
   } catch (err) {
-    res.status(500).json({ error: err.message })
+    res.status(500).json({ 
+      success: false,
+      message: err.message 
+    })
   }
 }
 
@@ -38,9 +49,16 @@ exports.updateUser = async (req, res) => {
   try {
     const user = await userService.updateUser(req.params.id, req.body)
     if (!user) return res.status(404).json({ message: 'User not found' })
-    res.json(user)
+    res.status(200).json({
+      status: true,
+      message: "User updated successfully",
+      data: user
+    })
   } catch (err) {
-    res.status(400).json({ error: err.message })
+    res.status(400).json({ 
+      status: false,
+      message: err.message 
+    })
   }
 }
 
@@ -48,9 +66,16 @@ exports.archiveUser = async (req, res) => {
   try {
     const user = await userService.archiveUser(req.params.id);
     if (!user) return res.status(404).json({ message: 'User not found' });
-    res.json({ message: 'User archived successfully', user });
+    res.status(200).json({ 
+      status: true,
+      message: 'User archived successfully', 
+      data: user 
+    });
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ 
+      status: false,
+      message: err.message 
+    });
   }
 };
 
@@ -58,9 +83,16 @@ exports.unarchiveUser = async (req, res) => {
   try {
     const user = await userService.unarchiveUser(req.params.id);
     if (!user) return res.status(404).json({ message: 'User not found' });
-    res.json({ message: 'User unarchived successfully', user });
+    res.json({ 
+      status: true,
+      message: 'User unarchived successfully', 
+      data: user 
+    });
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ 
+      status: false,
+      message: err.message 
+    });
   }
 };
 
@@ -68,9 +100,15 @@ exports.hardDeleteUser = async (req, res) => {
   try {
     const user = await userService.hardDeleteUser(req.params.id);
     if (!user) return res.status(404).json({ message: 'User not found' });
-    res.json({ message: 'User permanently deleted successfully' });
+    res.status(200).json({ 
+      status: true,
+      message: 'User permanently deleted successfully'
+    });
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ 
+      status: false,
+      message: err.message 
+    });
   }
 };
 
