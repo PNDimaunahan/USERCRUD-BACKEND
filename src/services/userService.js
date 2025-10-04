@@ -47,7 +47,7 @@ exports.archiveUser = async (id) => {
 exports.unarchiveUser = async (id) => {
     return await User.findByIdAndUpdate(
         id,
-        { Archived: false, archivedAt: null },
+        { Status: 'Active', Archived: false, archivedAt: null },
         { new: true }
     );
 };
