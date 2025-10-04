@@ -5,6 +5,7 @@ exports.createUser = async (req, res) => {
   try {
 
     for (const [key, value] of Object.entries(req.body)) {
+      if (key === "MiddleName") continue;
       if (typeof value === 'string' && value.trim().length === 0) {
         return res.status(400).json({
           success: false,

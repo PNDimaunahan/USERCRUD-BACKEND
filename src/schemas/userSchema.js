@@ -13,7 +13,7 @@ const userSchema = z.object({
   }),
   Email: z.string().email(),
   PhoneNumber: z.string().min(10),
-  Status: z.enum(['Active', 'Inactive', 'Suspended']).optional(),
+  Status: z.enum(['Active', 'Inactive', 'Suspended', "Archived", "Unarchived"]).optional(),
   Archived: z.boolean().optional(),
   archivedAt: z.string().optional()
 });
