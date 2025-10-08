@@ -37,6 +37,8 @@ src/
 ---
 
 ## Install Dependencies
+- Well the first step is to npm install or npm i then the other dependencies
 ```
+npm install
 npm install nodemon mongoose express cors dotenv zod
 ```
